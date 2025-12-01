@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SWAG — Marketplace</title>
+    <link rel="stylesheet" href="/swag_css/styles/styles.css">
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
+</head>
+
+<body class="marketplace-body">
+
+    <!-- NAVBAR -->
+    <nav class="navbar show">
+        <div class="navbar-inner">
+            <a href="/swag_css/index.html" class="logo">
+                <img src="../assets/SWAG.svg" class="logo-img" alt="SWAG Logo">
+                SWAG
+            </a>
+            <div class="nav-links">
+                <a href="index.html#about">About</a>
+                <a href="index.html#trending">Drop</a>
+                <a href="/swag_css/pages/marketplace.html">Marketplace</a>
+                <a href="#sell">Sell</a>
+                <a href="/swag_css/pages/contact.html">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="marketplace-header">
+        <h1>Marketplace</h1>
+        <p>Discover, flex and collect exclusive digital drops.</p>
+    </section>
+
+    <section class="marketplace-grid" id="marketGrid">
+        <!-- Cards générées dynamiquement -->
+    </section>
+
+    <div class="pagination">
+        <button id="prevPage">← Previous</button>
+        <button id="nextPage">Next →</button>
+    </div>
+
+    <!-- Popup rapide d'item -->
+    <div id="quickView" class="quick-view">
+        <div class="quick-view-inner">
+            <model-viewer id="quickModel" camera-controls auto-rotate></model-viewer>
+            <div class="quick-info">
+                <h2 id="quickName"></h2>
+                <p id="quickDesc"></p>
+                <button id="quickBuy" class="footer-btn">Buy Now</button>
+            </div>
+        </div>
+        <button id="closeQuick" class="close-quick">×</button>
+    </div>
+
+    <script src="/swag_css/scripts/market.js"></script>
+</body>
+
+</html>
