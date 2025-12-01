@@ -1,0 +1,12 @@
+.hero {
+    height: 100vh;
+    background-image: url("./media/swag_banner.jpeg");
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.4); /* assombrit l'image */
+}
