@@ -4,9 +4,9 @@
   --black: #0C0C0C;
   --white: #F1F1F1;
   --lime: #B8F10D;
-  --swag: #F20CB5;
-  --glass: rgba(12, 12, 12, 0.65);
-  --glass-border: rgba(241, 241, 241, 0.15);
+  --swag: #f20cb5;
+  --glass: #0c0c0ca6;
+  --glass-border: #f1f1f126;
 }
 
 /* RESET */
@@ -76,7 +76,7 @@ body {
 
 .logo-img {
   filter: brightness(0) saturate(100%) invert(19%) sepia(96%) saturate(7500%) hue-rotate(302deg) brightness(105%) contrast(110%)
-          drop-shadow(0 0 6px rgba(242, 12, 181, 0.8));
+          drop-shadow(0 0 6px #f20cb5cc);
 }
 
 .logo:hover .logo-img {
@@ -141,20 +141,31 @@ body {
 .hero {
   position: fixed;
   inset: 0;
-  height: 100vh;
   width: 100%;
-  background: url("/swag_css/assets/swag_banner.jpeg")
-      center/cover no-repeat;
+  height: 100vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+/* VIDEO FULLSCREEN */
+.hero-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(242, 12, 181, 0.35); /* filtre rose swag */
+  background: #f20cb540; 
   backdrop-filter: blur(4px);
 }
 
