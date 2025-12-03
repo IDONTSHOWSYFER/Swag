@@ -14,52 +14,28 @@ const ITEMS = [
   },
   {
     id: 2,
-    name: "Clothes Rack",
-    model: "clothes",
-    description: "A dynamic set of clothing in studio lighting.",
-  },
-  {
-    id: 3,
     name: "Dior B23",
     model: "dior_b23",
     description: "The iconic Dior B23 luxury sneaker rendered in 3D.",
   },
   {
-    id: 4,
-    name: "Hachis Clothes",
-    model: "hachis_clothes",
-    description: "Premium garments modeled with detailed stitching.",
-  },
-  {
-    id: 5,
-    name: "Hoodie Base",
-    model: "hoodiebasemodel",
-    description: "A clean hoodie base model for fashion previews.",
-  },
-  {
-    id: 6,
+    id: 3,
     name: "Jordan 4 Yellow Thunder",
     model: "j4_yellow_thunder",
     description: "A vibrant AJ4 sneaker with thunder-bright accents.",
   },
   {
-    id: 7,
-    name: "Leather Suit",
-    model: "leather_suit",
-    description: "High-end leather suit for futuristic styling.",
-  },
-  {
-    id: 8,
+    id: 4,
     name: "Nike TN Red",
     model: "nike_tn_red",
     description: "Aggressive, bold TN in a fiery red gradient.",
   },
   {
-    id: 9,
-    name: "Pandy",
-    model: "pandy",
-    description: "Cute stylized panda character model.",
-  },
+    id: 5,
+    name: "AF1",
+    model: "af1",
+    description: "Classic Air Force 1 silhouette redesigned in 3D.",
+  }
 ];
 
 const ITEMS_PER_PAGE = 6;
