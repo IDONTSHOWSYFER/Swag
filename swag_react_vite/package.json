@@ -13,10 +13,12 @@
     "@google/model-viewer": "^4.1.0",
     "@tailwindcss/vite": "^4.1.17",
     "gsap": "^3.13.0",
+    "motion": "^12.23.25",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.10.0",
-    "tailwindcss": "^4.1.17"
+    "tailwindcss": "^4.1.17",
+    "validator": "^13.15.23"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
@@ -27,6 +29,6 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
-    "vite": "^7.2.4"
+    "vite": "^7.2.6"
   }
 }

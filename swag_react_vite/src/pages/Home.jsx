@@ -8,7 +8,6 @@ import { HeroProvider } from "../context/HeroProvider";
 export default function Home() {
     return (
         <HeroProvider>
-            <Navbar />
             <Hero />
             <MagicBento />
             <Footer />
