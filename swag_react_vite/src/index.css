@@ -19,3 +19,15 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
+.electric-border {
+  position: relative;
+  overflow: visible;
+}
+.electric-border canvas {
+  mix-blend-mode: screen;
+}
+
+body, html {
+  cursor: none !important;
+}

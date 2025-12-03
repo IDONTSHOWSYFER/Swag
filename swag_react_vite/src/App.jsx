@@ -1,13 +1,26 @@
-import './App.css'
-import Home from './pages/Home'
+import ElectricCursor from "./components/ElectricCursor";
+import Home from "./pages/Home";
+import Marketplace from "./pages/Marketplace";
+import { Routes, Route } from "react-router-dom";
 
-function App() {
-
+export default function App() {
+  
   return (
     <>
-        <Home />
-    </>
-  )
-}
+      {/* CURSEUR ÉLECTRIQUE */}
+      <ElectricCursor
+        color="#ccff33"
+        size={20}
+        haloSize={120}
+        intensity={50}
+        speed={0.18}
+      />
 
-export default App
+      {/* ROUTES DE L’APP */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/marketplace" element={<Marketplace />} />
+      </Routes>
+    </>
+  );
+}
