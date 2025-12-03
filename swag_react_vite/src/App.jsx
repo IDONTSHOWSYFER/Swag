@@ -6,6 +6,7 @@ export default function App() {
 
   return (
     <>
+      <Navbar />
       <ElectricCursor
         color="#ccff33"
         size={20}
@@ -13,7 +14,6 @@ export default function App() {
         intensity={50}
         speed={0.18}
       />
-      <Navbar />
       <AppRouter />
     </>
   );

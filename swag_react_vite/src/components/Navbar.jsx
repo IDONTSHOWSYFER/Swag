@@ -4,10 +4,7 @@ import ElectricBorder from "../components/ElectricBorder";
 import { Link } from "react-router-dom";   // ← OBLIGATOIRE
 
 export default function Navbar() {
-    const { isComplete } = useHero();
     const direction = useScoolDirection();
-
-    if (!isComplete) return null;
 
     return (
         <>
@@ -53,7 +50,7 @@ export default function Navbar() {
                     <div className="flex gap-8 opacity-85 items-center">
                         <Link to="/" className="hover:text-lime-400 transition">About</Link>
                         <Link to="/marketplace" className="hover:text-lime-400 transition">Marketplace</Link>
-                        <a href="#" className="hover:text-lime-400 transition">Support</a>
+                        <Link to="/support" className="hover:text-lime-400 transition">Support</Link>
                         <a href="#" className="hover:text-lime-400 transition">News</a>
                     </div>
 
