@@ -5,8 +5,6 @@ export default function Hero() {
 
     const { step, setStep, locked, setLocked } = useHero();
 
-    console.log("STATE → locked =", locked, "step =", step);
-
     // 1. Blocage CSS COMPLET
     useEffect(() => {
         const overflowValue = locked ? "hidden" : "auto";
