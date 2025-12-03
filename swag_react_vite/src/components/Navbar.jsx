@@ -2,9 +2,26 @@ import { useHero } from "../context/useHero";
 import useScoolDirection from "../hooks/useScoolDirection";
 import ElectricBorder from "../components/ElectricBorder";
 import { Link } from "react-router-dom";   // ← OBLIGATOIRE
+import { useAuth } from "../context/useAuth";
+import { useState, useEffect } from "react";
 
 export default function Navbar() {
     const direction = useScoolDirection();
+    const auth = useAuth() || {};
+    const { user, logout } = auth;
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    // CLOSE MENU WHEN CLICKING OUTSIDE
+    const handleClickOutside = (e) => {
+        if (!e.target.closest(".profile-menu") && !e.target.closest(".profile-button")) {
+            setMenuOpen(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener("click", handleClickOutside);
+        return () => document.removeEventListener("click", handleClickOutside);
+    }, []);
 
     return (
         <>
@@ -48,47 +65,92 @@ export default function Navbar() {
 
                     {/* LINKS */}
                     <div className="flex gap-8 opacity-85 items-center">
-                        <Link to="/" className="hover:text-lime-400 transition">About</Link>
+                        <Link to="/" className="hover:text-lime-400 transition">Home</Link>
                         <Link to="/marketplace" className="hover:text-lime-400 transition">Marketplace</Link>
                         <Link to="/support" className="hover:text-lime-400 transition">Support</Link>
-                        <a href="#" className="hover:text-lime-400 transition">News</a>
+                        <Link to="/news" className="hover:text-lime-400 transition">News</Link>
                     </div>
 
                     {/* BUTTONS WITH ELECTRIC BORDER */}
                     <div className="flex gap-4 text-sm items-center">
+                        {!user ? (
+                            <>
+                                <ElectricBorder
+                                    color="#f20cb5"
+                                    speed={1.5}
+                                    chaos={0.6}
+                                    thickness={2}
+                                    style={{ borderRadius: 9999 }}
+                                >
+                                    <Link
+                                        to="/login"
+                                        className="px-4 py-2 bg-[#f20cb5] rounded-full block text-center text-white"
+                                    >
+                                        Log in
+                                    </Link>
+                                </ElectricBorder>
 
-                        {/* Log in – electric pink */}
-                        <ElectricBorder
-                            color="#f20cb5"
-                            speed={1.5}
-                            chaos={0.6}
-                            thickness={2}
-                            style={{ borderRadius: 9999 }}
-                        >
-                            <a
-                                href="#"
-                                className="px-4 py-2 bg-[#f20cb5] rounded-full block text-center text-white"
-                            >
-                                Log in
-                            </a>
-                        </ElectricBorder>
+                                <ElectricBorder
+                                    color="#ccff33"
+                                    speed={1.4}
+                                    chaos={0.55}
+                                    thickness={2}
+                                    style={{ borderRadius: 9999 }}
+                                >
+                                    <Link
+                                        to="/register"
+                                        className="px-4 py-2 bg-lime-400 text-black rounded-full block text-center"
+                                    >
+                                        Register
+                                    </Link>
+                                </ElectricBorder>
+                            </>
+                        ) : (
+                            <div className="relative">
+                                <div
+                                    className="
+                                        profile-button
+                                        w-10 h-10 rounded-full bg-lime-400 text-black
+                                        flex items-center justify-center font-bold cursor-pointer
+                                        shadow-[0_0_15px_#ccff33]
+                                    "
+                                    onClick={() => setMenuOpen(!menuOpen)}
+                                >
+                                    {user?.name?.charAt(0)?.toUpperCase() || "?"}
+                                </div>
 
-                        {/* Register – electric lime */}
-                        <ElectricBorder
-                            color="#ccff33"
-                            speed={1.4}
-                            chaos={0.55}
-                            thickness={2}
-                            style={{ borderRadius: 9999 }}
-                        >
-                            <a
-                                href="#"
-                                className="px-4 py-2 bg-lime-400 text-black rounded-full block text-center"
-                            >
-                                Register
-                            </a>
-                        </ElectricBorder>
+                                <div
+                                    className={`
+                                        profile-menu
+                                        absolute right-0 mt-3 w-40 rounded-xl overflow-hidden
+                                        bg-white/10 backdrop-blur-xl border border-white/20
+                                        transition-all duration-200
+                                        ${menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}
+                                    `}
+                                >
+                                    <div className="px-4 py-3 text-white/80 text-sm border-b border-white/10">
+                                        Signed in as<br />
+                                        <span className="text-white font-semibold">
+                                            {typeof user?.email === "string" ? user.email : "unknown"}
+                                        </span>
+                                    </div>
 
+                                    <Link
+                                        to="/profile"
+                                        className="block px-4 py-2 text-white hover:bg-white/10"
+                                    >
+                                        Profile
+                                    </Link>
+
+                                    <button
+                                        className="block text-left w-full px-4 py-2 text-red-400 hover:bg-white/10"
+                                        onClick={logout}
+                                    >
+                                        Log out
+                                    </button>
+                                </div>
+                            </div>
+                        )}
                     </div>
 
                 </div>

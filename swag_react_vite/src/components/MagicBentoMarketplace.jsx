@@ -2,6 +2,7 @@ import { useRef, useEffect, useState, useCallback } from "react";
 import { gsap } from "gsap";
 import ModelViewer from "../components/ModelViewer";
 import ItemModal from "../components/ItemModal";
+import Footer from "./Footer";
 
 const DEFAULT_PARTICLE_COUNT = 12;
 const DEFAULT_SPOTLIGHT_RADIUS = 300;
@@ -52,6 +53,7 @@ const ParticleCard = ({
   enableTilt = true,
   clickEffect = false,
   enableMagnetism = false,
+  onClick,
 }) => {
   const cardRef = useRef(null);
   const particlesRef = useRef([]);
@@ -294,6 +296,7 @@ const ParticleCard = ({
       ref={cardRef}
       className={`${className} relative overflow-hidden`}
       style={{ ...style, position: "relative", overflow: "hidden" }}
+      onClick={onClick}
     >
       {children}
     </div>
@@ -471,7 +474,7 @@ const useMobileDetection = () => {
   return isMobile;
 };
 
-MagicBentoMarketplace = ({
+const MagicBentoMarketplace = ({
   items = [],
   onSelect = () => {},
   textAutoHide = true,
@@ -487,6 +490,7 @@ MagicBentoMarketplace = ({
   enableMagnetism = true,
 }) => {
   const gridRef = useRef(null);
+  const [activeDescription, setActiveDescription] = useState(null);
   const modelCardRef = useRef(null);
   const [openItem, setOpenItem] = useState(null);
   const [modalPos, setModalPos] = useState(null);
@@ -515,7 +519,7 @@ MagicBentoMarketplace = ({
 
 
   const baseClassName =
-    `card flex flex-col justify-between relative aspect-[4/3] min-h-[200px] w-full max-w-full ` +
+    `card flex flex-col justify-between relative aspect-[4/3] min-h-[350px] w-full max-w-full ` +
     `p-5 rounded-[20px] border border-solid font-light overflow-hidden ` +
     `transition-all duration-300 ease-in-out hover:-translate-y-0.5 ` +
     `hover:shadow-[0_8px_25px_rgba(0,0,0,0.15)] ${
@@ -757,6 +761,15 @@ MagicBentoMarketplace = ({
               min-height: 180px;
             }
           }
+
+          @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+
+          .animate-fadeIn {
+            animation: fadeIn 0.25s ease-out forwards;
+          }
         `}
       </style>
 
@@ -770,38 +783,87 @@ MagicBentoMarketplace = ({
         />
       )}
 
-            <BentoCardGrid gridRef={gridRef}>
-  <div className="card-responsive grid gap-2">
-
-    {items.map((item) => (
-      <ParticleCard
-        key={item.id}
-        className={baseClassName}
-        style={baseCardStyle}
-        disableAnimations={shouldDisableAnimations}
-        particleCount={particleCount}
-        glowColor={glowColor}
-        enableTilt={enableTilt}
-        clickEffect={clickEffect}
-        enableMagnetism={enableMagnetism}
-        onClick={() => onSelect(item)}
+{/* ICI → ON REND DE NOUVEAU LES VRAIES CARTES */}
+<div className="flex flex-col full-h-screen">
+  <div className="flex-1">
+    <BentoCardGrid gridRef={gridRef}>
+      <div
+        className="
+          grid 
+          grid-cols-1 
+          sm:grid-cols-2 
+          lg:grid-cols-3 
+          gap-4
+          auto-rows-fr
+        "
       >
-        <div className="card__content flex flex-col gap-3 relative text-white">
+        {items.map((item) => (
+          <ParticleCard
+            key={item.id}
+            className={`${baseClassName} h-auto min-h-0`}
+            style={baseCardStyle}
+            disableAnimations={shouldDisableAnimations}
+            particleCount={particleCount}
+            glowColor={glowColor}
+            enableTilt={enableTilt}
+            clickEffect={clickEffect}
+            enableMagnetism={enableMagnetism}
+            onClick={() => {
+              const isOpening = activeDescription !== item.id;
+              if (isOpening) {
+                const audio = new Audio("/sound/open.mp3");
+                audio.play().catch(() => {});
+              }
+              setActiveDescription(isOpening ? item.id : null);
+            }}
+          >
+            <div className="card__content flex flex-col gap-4 relative text-white h-full">
+              <h2 className="text-xl md:text-2xl font-righteous text-lime-400 text-center">
+                {item.name}
+              </h2>
 
-          <h2 className="text-xl md:text-2xl font-righteous text-lime-400 text-center">
-            {item.name}
-          </h2>
+              <div
+                className="
+                  w-full 
+                  rounded-xl 
+                  overflow-hidden
+                  border border-[rgba(242,12,181,0.3)]
+                  bg-[rgba(242,12,181,0.05)]
+                "
+                style={{ aspectRatio: '16 / 9' }}
+              >
+                <model-viewer
+                  src={`/models/${item.model}.glb`}
+                  auto-rotate
+                  camera-controls
+                  disable-zoom
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'contain',
+                    display: 'block',
+                  }}
+                ></model-viewer>
+              </div>
 
-          <div className="flex-1 flex items-center justify-center mt-3 border border-[rgba(242,12,181,0.3)] bg-[rgba(242,12,181,0.05)] rounded-xl p-3">
-            <ModelViewer name={item.model} />
-          </div>
-
-        </div>
-      </ParticleCard>
-    ))}
-
+              {activeDescription === item.id && (
+                <div className="
+                  mt-3 p-3 rounded-xl 
+                  bg-white/10 backdrop-blur-md 
+                  border border-white/20 
+                  text-sm text-white 
+                  animate-fadeIn
+                ">
+                  {item.description}
+                </div>
+              )}
+            </div>
+          </ParticleCard>
+        ))}
+      </div>
+    </BentoCardGrid>
   </div>
-</BentoCardGrid>
+</div>
         </>
     );
 };

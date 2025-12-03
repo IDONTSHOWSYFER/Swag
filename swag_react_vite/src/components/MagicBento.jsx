@@ -514,8 +514,8 @@ const MagicBento = ({
     };
 
 
-    const baseClassName =
-        `card flex flex-col justify-between relative aspect-[4/3] min-h-[200px] w-full max-w-full ` +
+  const baseClassName =
+        `card flex flex-col justify-between relative h-auto min-h-[200px] w-full max-w-full ` +
         `p-5 rounded-[20px] border border-solid font-light overflow-hidden ` +
         `transition-all duration-300 ease-in-out hover:-translate-y-0.5 ` +
         `hover:shadow-[0_8px_25px_rgba(0,0,0,0.15)] ${
@@ -771,11 +771,11 @@ const MagicBento = ({
             )}
 
             <BentoCardGrid gridRef={gridRef}>
-                <div className="card-responsive grid grid-cols-2 gap-2">
+                <div className="card-responsive grid grid-cols-2 gap-4 place-items-center mx-auto">
                     <div className="flex flex-col gap-2">
                         {/* Haut gauche - About Swag */}
                         <ParticleCard
-                            className={baseClassName + " h-[25%]"}
+                            className={baseClassName + " h-auto"}
                             style={baseCardStyle}
                             disableAnimations={shouldDisableAnimations}
                             particleCount={particleCount}
@@ -793,6 +793,12 @@ const MagicBento = ({
                                     sought-after pieces in streetwear culture. From limited-edition drops to vintage
                                     heat, we connect true drip-seekers with elite sellers worldwide. No fakes, no cap —
                                     just authentic, high-quality gear curated for people who live and breathe style.
+                                </p>
+                                <p className="text-xs md:text-sm font-geologica leading-5 opacity-70 mt-2">
+                                  We aim to elevate streetwear culture with a marketplace that merges authenticity, creativity, and next‑gen digital experiences.
+                                </p>
+                                <p className="text-xs md:text-sm font-geologica leading-5 opacity-60 mt-2">
+                                  Our mission is to push the boundaries of digital fashion by blending real-world drip with immersive 3D technology, giving every user a space to explore, flex, and express their identity.
                                 </p>
                             </div>
                         </ParticleCard>
@@ -832,7 +838,7 @@ const MagicBento = ({
                     <div className="flex flex-col gap-2">
                         {/* Haut droite - Bento card avec model viewer */}
                         <ParticleCard
-                            className={baseClassName}
+                            className={baseClassName + " min-h-[320px]"}
                             style={baseCardStyle}
                             disableAnimations={shouldDisableAnimations}
                             particleCount={particleCount}
@@ -845,7 +851,7 @@ const MagicBento = ({
                                 <h3 className="card__label font-righteous mb-3 text-2xl opacity-80">🔥 Drop preview</h3>
                             </div>
                             <div className="card__content flex flex-col relative text-white h-full">
-                                <div className="flex-1 flex items-center justify-center">
+                                <div className="flex items-center justify-center h-[260px] w-full">
                                     {/* MODEL VIEWER PLACEHOLDER */}
                                     <div
                                         className="w-full h-full flex items-center font-geologica justify-center rounded-xl border border-dashed border-[rgba(242,12,181,0.4)] bg-[rgba(242,12,181,0.05)] text-xs md:text-sm opacity-90">
@@ -857,7 +863,7 @@ const MagicBento = ({
 
                         {/* Bas droite - Your new resell home */}
                         <ParticleCard
-                            className={baseClassName + " h-[25%]"}
+                            className={baseClassName + " h-auto"}
                             style={baseCardStyle}
                             disableAnimations={shouldDisableAnimations}
                             particleCount={particleCount}
@@ -874,6 +880,9 @@ const MagicBento = ({
                                     Every listing is verified, every seller is rated, and every drop is tracked.
                                     From first-time flippers to seasoned collectors, SWAG gives you a clean,
                                     safe and immersive marketplace to buy, sell and flex.
+                                </p>
+                                <p className="text-xs md:text-sm font-geologica leading-5 opacity-70 mt-2">
+                                  Whether you're hunting rare heat or flipping your latest pick‑ups, SWAG gives every drop a place to shine.
                                 </p>
                             </div>
                         </ParticleCard>
