@@ -484,7 +484,7 @@ const MagicBento = ({
   glowColor = DEFAULT_GLOW_COLOR,
   clickEffect = true,
   enableMagnetism = true,
-  
+
 }) => {
   const gridRef = useRef(null);
   const modelCardRef = useRef(null);
@@ -770,276 +770,129 @@ const MagicBento = ({
         />
       )}
 
-      <BentoCardGrid gridRef={gridRef}>
-        <div className="card-responsive grid gap-2">
-          {/* Haut gauche - About Swag */}
-          {enableStars ? (
-            <ParticleCard
-              className={baseClassName}
-              style={baseCardStyle}
-              disableAnimations={shouldDisableAnimations}
-              particleCount={particleCount}
-              glowColor={glowColor}
-              enableTilt={enableTilt}
-              clickEffect={clickEffect}
-              enableMagnetism={enableMagnetism}
-            >
-              <div className="card__content flex flex-col gap-2 relative text-white">
-                <h2 className="text-xl md:text-4xl font-righteous m-0 mb-3 text-lime-400">
-                  About Swag
-                </h2>
-                <p
-                  className={`text-xs md:text-sm font-geologica leading-5 opacity-90`}
-                >
-                  Swag Marketplace is the go-to spot for buying and selling the
-                  rarest, most sought-after pieces in streetwear culture. From
-                  limited-edition drops to vintage heat, we connect true
-                  drip-seekers with elite sellers worldwide. No fakes, no cap —
-                  just authentic, high-quality gear curated for people who live
-                  and breathe style.
-                </p>
-                <p
-                  className={`text-xs md:text-sm font-geologica leading-5 opacity-90`}
-                >
-                  Whether you’re hunting for exclusives or flipping your own
-                  collection, Swag Marketplace keeps the vibe fast, fresh, and
-                  secure. Level up your wardrobe and flex with confidence — the
-                  rare drip starts here.{" "}
-                </p>
-              </div>
-            </ParticleCard>
-          ) : (
-            <div
-              className={baseClassName}
-              style={baseCardStyle}
-              ref={attachHoverHandlers}
-            >
-              <div className="card__header flex justify-between gap-3 relative text-white">
-                <span className="card__label text-3xl opacity-80">About</span>
-              </div>
-              <div className="card__content flex flex-col relative text-white">
-                <h2 className="text-lg md:text-xl font-semibold m-0 mb-3 text-lime-400">
-                  About Swag
-                </h2>
-                <p
-                  className={`text-xs md:text-sm leading-5 font-geologica opacity-90 ${
-                    textAutoHide ? "text-clamp-2" : ""
-                  }`}
-                >
-                  SWAG is a next-gen resell marketplace for sneakers, streetwear
-                  and tech. We blend culture, design and authenticity to turn
-                  every drop into an experience.
-                </p>
-              </div>
-            </div>
-          )}
+            <BentoCardGrid gridRef={gridRef}>
+                <div className="card-responsive grid gap-2">
+                    {/* Haut gauche - About Swag */}
+                    <ParticleCard
+                        className={baseClassName}
+                        style={baseCardStyle}
+                        disableAnimations={shouldDisableAnimations}
+                        particleCount={particleCount}
+                        glowColor={glowColor}
+                        enableTilt={enableTilt}
+                        clickEffect={clickEffect}
+                        enableMagnetism={enableMagnetism}
+                    >
+                        <div className="card__content flex flex-col gap-2 relative text-white">
+                            <h2 className="text-2xl md:text-3xl font-righteous m-0 mb-3 text-lime-400">
+                                About Swag
+                            </h2>
+                            <p className={`text-xs md:text-sm font-geologica leading-5 opacity-90`}>
+                                Swag Marketplace is the go-to spot for buying and selling the rarest, most
+                                sought-after pieces in streetwear culture. From limited-edition drops to vintage
+                                heat, we connect true drip-seekers with elite sellers worldwide. No fakes, no cap —
+                                just authentic, high-quality gear curated for people who live and breathe style.
+                            </p>
+                            <p className={`text-xs md:text-sm font-geologica leading-5 opacity-90`}>
+                                Whether you’re hunting for exclusives or flipping your own collection, Swag
+                                Marketplace keeps the vibe fast, fresh, and secure. Level up your wardrobe and flex
+                                with confidence — the rare drip starts here. </p>
+                        </div>
+                    </ParticleCard>
 
-          {/* Haut droite - Bento card avec model viewer */}
-{enableStars ? (
-  <ParticleCard
-    className={baseClassName}
-    style={baseCardStyle}
-    disableAnimations={shouldDisableAnimations}
-    particleCount={particleCount}
-    glowColor={glowColor}
-    enableTilt={enableTilt}
-    clickEffect={clickEffect}
-    enableMagnetism={enableMagnetism}
-  >
-    <div className="card__header flex justify-between gap-3 relative text-white">
-      <h3 className="card__label font-righteous mb-3 text-2xl opacity-80">
-        🔥 Drop preview
-      </h3>
-    </div>
+                    {/* Haut droite - Bento card avec model viewer */}
+                    <ParticleCard
+                        className={baseClassName}
+                        style={baseCardStyle}
+                        disableAnimations={shouldDisableAnimations}
+                        particleCount={particleCount}
+                        glowColor={glowColor}
+                        enableTilt={enableTilt}
+                        clickEffect={clickEffect}
+                        enableMagnetism={enableMagnetism}
+                    >
+                        <div className="card__header flex justify-between gap-3 relative text-white">
+                            <h3 className="card__label font-righteous mb-3 text-2xl opacity-80">🔥 Drop preview</h3>
+                        </div>
+                        <div className="card__content flex flex-col relative text-white h-full">
+                            <div className="flex-1 flex items-center justify-center">
+                                {/* MODEL VIEWER PLACEHOLDER */}
+                                <div
+                                    className="w-full h-full flex items-center font-geologica justify-center rounded-xl border border-dashed border-[rgba(242,12,181,0.4)] bg-[rgba(242,12,181,0.05)] text-xs md:text-sm opacity-90">
+                                    <ModelViewer name={"af1"}/>
+                                </div>
+                            </div>
+                        </div>
+                    </ParticleCard>
 
-    <div className="card__content flex flex-col relative text-white h-full">
-      <div className="flex-1 flex items-center justify-center">
+                    {/* Bas gauche - KPI roses + description blanche */}
+                    <ParticleCard
+                        className={baseClassName}
+                        style={baseCardStyle}
+                        disableAnimations={shouldDisableAnimations}
+                        particleCount={particleCount}
+                        glowColor={glowColor}
+                        enableTilt={enableTilt}
+                        clickEffect={clickEffect}
+                        enableMagnetism={enableMagnetism}
+                    >
+                        <div className="card__header flex justify-between gap-3 relative text-white">
+                            <h3 className="card__label font-righteous text-base opacity-80">KPI</h3>
+                        </div>
+                        <div className="card__content flex flex-col gap-4 relative text-white">
+                            <div className="grid grid-cols-3 gap-3">
+                                <div>
+                                    <p className="text-lg md:text-3xl font-righteous text-pink-400">150K+</p>
+                                    <p className="text-[11px] md:text-xs font-geologica opacity-80">
+                                        Verified pairs
+                                    </p>
+                                </div>
+                                <div>
+                                    <p className="text-lg md:text-3xl font-righteous text-pink-400">4.9/5</p>
+                                    <p className="text-[11px] md:text-xs font-geologica opacity-80">
+                                        Avg seller rating
+                                    </p>
+                                </div>
+                                <div>
+                                    <p className="text-lg md:text-3xl font-righteous text-pink-400">24/7</p>
+                                    <p className="text-[11px] md:text-xs font-geologica opacity-80">
+                                        Drop tracking
+                                    </p>
+                                </div>
+                            </div>
+                            <p className="text-xs md:text-sm font-geologica leading-5 text-white opacity-90">
+                                Live KPIs keep every resell move transparent — from supply and prices
+                                to trust and speed.
+                            </p>
+                        </div>
+                    </ParticleCard>
 
-<div
-  ref={modelCardRef}
-  onClick={() => openItemModal(ITEMS.af1)}
-  className="cursor-pointer active:scale-95 transition w-full h-full"
->
-  <ModelViewer name="af1" />
-</div>
-      </div>
-    </div>
-  </ParticleCard>
-) : (
-            <div
-              className={baseClassName}
-              style={baseCardStyle}
-              ref={attachHoverHandlers}
-            >
-              <div className="card__header flex justify-between gap-3 relative text-white">
-                <h3 className="card__label font-righteous text-base opacity-80">
-                  Drop preview
-                </h3>
-              </div>
-              <div className="card__content flex flex-col relative text-white h-full">
-                <div className="flex-1 flex items-center justify-center">
-                  {/* MODEL VIEWER PLACEHOLDER */}
-                  <div className="w-full h-full flex items-center font-geologica justify-center rounded-xl border border-dashed border-[rgba(242,12,181,0.4)] bg-[rgba(242,12,181,0.05)] text-xs md:text-sm opacity-90">
-                    3D model viewer goes here
-                  </div>
+                    {/* Bas droite - Your new resell home */}
+                    <ParticleCard
+                        className={baseClassName}
+                        style={baseCardStyle}
+                        disableAnimations={shouldDisableAnimations}
+                        particleCount={particleCount}
+                        glowColor={glowColor}
+                        enableTilt={enableTilt}
+                        clickEffect={clickEffect}
+                        enableMagnetism={enableMagnetism}
+                    >
+                        <div className="card__content flex flex-col relative text-white">
+                            <h3 className="text-lg text-lime-400 md:text-xl font-righteous m-0 mb-3">
+                                Your new resell home
+                            </h3>
+                            <p className={`text-xs md:text-sm font-geologica leading-5 opacity-90}`}>
+                                Every listing is verified, every seller is rated, and every drop is tracked.
+                                From first-time flippers to seasoned collectors, SWAG gives you a clean,
+                                safe and immersive marketplace to buy, sell and flex.
+                            </p>
+                        </div>
+                    </ParticleCard>
                 </div>
-              </div>
-            </div>
-          )}
-
-          {/* Bas gauche - KPI roses + description blanche */}
-          {enableStars ? (
-            <ParticleCard
-              className={baseClassName}
-              style={baseCardStyle}
-              disableAnimations={shouldDisableAnimations}
-              particleCount={particleCount}
-              glowColor={glowColor}
-              enableTilt={enableTilt}
-              clickEffect={clickEffect}
-              enableMagnetism={enableMagnetism}
-            >
-              <div className="card__header flex justify-between gap-3 relative text-white">
-                <h3 className="card__label font-righteous text-base opacity-80">
-                  KPI
-                </h3>
-              </div>
-              <div className="card__content flex flex-col gap-4 relative text-white">
-                <div className="grid grid-cols-3 gap-3">
-                  <div>
-                    <p className="text-lg md:text-3xl font-righteous text-pink-400">
-                      150K+
-                    </p>
-                    <p className="text-[11px] md:text-xs font-geologica opacity-80">
-                      Verified pairs
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-lg md:text-3xl font-righteous text-pink-400">
-                      4.9/5
-                    </p>
-                    <p className="text-[11px] md:text-xs font-geologica opacity-80">
-                      Avg seller rating
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-lg md:text-3xl font-righteous text-pink-400">
-                      24/7
-                    </p>
-                    <p className="text-[11px] md:text-xs font-geologica opacity-80">
-                      Drop tracking
-                    </p>
-                  </div>
-                </div>
-                <p className="text-xs md:text-sm font-geologica leading-5 text-white opacity-90">
-                  Live KPIs keep every resell move transparent — from supply and
-                  prices to trust and speed.
-                </p>
-              </div>
-            </ParticleCard>
-          ) : (
-            <div
-              className={baseClassName}
-              style={baseCardStyle}
-              ref={attachHoverHandlers}
-            >
-              <div className="card__header flex justify-between gap-3 relative text-white">
-                <span className="card__label text-base opacity-80">KPI</span>
-              </div>
-              <div className="card__content flex flex-col gap-4 relative text-white">
-                <div className="grid grid-cols-3 gap-3">
-                  <div>
-                    <p className="text-lg md:text-2xl font-geologica text-pink-400">
-                      150K+
-                    </p>
-                    <p className="text-[11px] md:text-xs font-geologica opacity-80">
-                      Verified pairs
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-lg md:text-2xl font-geologica text-pink-400">
-                      4.9/5
-                    </p>
-                    <p className="text-[11px] md:text-xs font-geologica opacity-80">
-                      Avg seller rating
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-lg md:text-2xl font-geologica text-pink-400">
-                      24/7
-                    </p>
-                    <p className="text-[11px] md:text-xs font-geologica opacity-80">
-                      Drop tracking
-                    </p>
-                  </div>
-                </div>
-                <p className="text-xs md:text-sm font-geologica leading-5 text-white opacity-90">
-                  Live KPIs keep every resell move transparent — from supply and
-                  prices to trust and speed.
-                </p>
-              </div>
-            </div>
-          )}
-
-          {/* Bas droite - Your new resell home */}
-          {enableStars ? (
-            <ParticleCard
-              className={baseClassName}
-              style={baseCardStyle}
-              disableAnimations={shouldDisableAnimations}
-              particleCount={particleCount}
-              glowColor={glowColor}
-              enableTilt={enableTilt}
-              clickEffect={clickEffect}
-              enableMagnetism={enableMagnetism}
-            >
-              <div className="card__content flex flex-col relative text-white">
-                <h3 className="text-lg text-lime-400 md:text-xl font-righteous m-0 mb-3">
-                  Your new resell home
-                </h3>
-                <p
-                  className={`text-xs md:text-sm font-geologica leading-5 opacity-90}`}
-                >
-                  Every listing is verified, every seller is rated, and every
-                  drop is tracked. From first-time flippers to seasoned
-                  collectors, SWAG gives you a clean, safe and immersive
-                  marketplace to buy, sell and flex.
-                </p>
-              </div>
-            </ParticleCard>
-          ) : (
-            <div
-              className={baseClassName}
-              style={baseCardStyle}
-              ref={attachHoverHandlers}
-            >
-              <div className="card__content flex flex-col relative text-white">
-                <h3 className="text-lg md:text-xl font-semibold m-0 mb-3">
-                  Your new resell home
-                </h3>
-                <p className={`text-xs md:text-sm leading-5 opacity-90}`}>
-                  Every listing is verified, every seller is rated, and every
-                  drop is tracked. From first-time flippers to seasoned
-                  collectors, SWAG gives you a clean, safe and immersive
-                  marketplace to buy, sell and flex.
-                </p>
-              </div>
-            </div>
-          )}
-        </div>
-      </BentoCardGrid>
-{openItem && modalPos && (
-    <ItemModal
-        item={openItem}
-        pos={modalPos}
-        onClose={() => {
-            setOpenItem(null);
-            setModalPos(null);
-        }}
-    />
-)}
-    </>
-  );
+            </BentoCardGrid>
+        </>
+    );
 };
 
 export default MagicBento;
