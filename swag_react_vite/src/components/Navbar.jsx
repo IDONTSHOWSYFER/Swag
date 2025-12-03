@@ -7,8 +7,6 @@ export default function Navbar() {
     const { isComplete } = useHero();
     const direction = useScoolDirection();
 
-    if (!isComplete) return null;
-
     return (
         <>
             <nav
