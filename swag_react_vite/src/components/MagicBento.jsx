@@ -485,6 +485,19 @@ const MagicBento = ({
                         enableMagnetism = true,
 
                     }) => {
+    // FIX: Prevent scroll-lock when navigating away from MagicBento
+    useEffect(() => {
+      const resetScroll = () => {
+        document.body.style.overflow = "auto";
+        document.documentElement.style.overflow = "auto";
+      };
+
+      resetScroll();
+
+      return () => {
+        resetScroll();
+      };
+    }, []);
     const gridRef = useRef(null);
     const modelCardRef = useRef(null);
     const [openItem, setOpenItem] = useState(null);
@@ -852,30 +865,42 @@ const MagicBento = ({
                                 <h3 className="card__label font-righteous mb-3 text-2xl opacity-80">🔥 Drop preview</h3>
                             </div>
                             <div className="card__content flex flex-col relative text-white h-full">
-                                <div className="flex items-center justify-center h-[260px] w-full">
-                                    {/* MODEL VIEWER PLACEHOLDER */}
-                                    <div
-                                      className="relative w-full h-full flex items-center justify-center rounded-xl border border-dashed border-[rgba(242,12,181,0.4)] bg-[rgba(242,12,181,0.05)] cursor-pointer"
-                                      onClick={(e) => {
-                                        e.stopPropagation();
-                                        const audio = new Audio("/sound/open.mp3");
-                                        audio.volume = 0.6;
-                                        audio.play().catch(() => {});
-                                        openItemModal({
-                                          sound: "/sound/open.mp3",
-                                          title: "AF1 Drop Preview",
-                                          description:
-                                            "A sneak peek at the upcoming AF1 digital‑exclusive drop. Clean, minimal, and built for collectors.",
-                                        });
-                                      }}
-                                    >
-                                      <div className="absolute inset-0 z-20"></div>
+                              <div className="flex flex-col items-center justify-center h-[260px] w-full">
 
-                                      <div className="relative h-full w-full pointer-events-none flex items-center justify-center">
-                                        <ModelViewer model={"af1"} desc="shoes" />
-                                      </div>
-                                    </div>
+                                <div
+                                  className="relative w-full h-full flex items-center justify-center rounded-xl border border-dashed border-[rgba(242,12,181,0.4)] bg-[rgba(242,12,181,0.05)] cursor-pointer"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    const audio = new Audio("/sound/open.mp3");
+                                    audio.volume = 0.6;
+                                    audio.play().catch(() => {});
+                                    openItemModal({
+                                      sound: "/sound/open.mp3",
+                                      title: "AF1 Drop Preview",
+                                      description:
+                                        "A sneak peek at the upcoming AF1 digital‑exclusive drop. Clean, minimal, and built for collectors.",
+                                    });
+                                  }}
+                                >
+                                  <div className="absolute inset-0 z-20"></div>
+
+                                  <div className="relative h-full w-full flex items-center justify-center">
+                                    <ModelViewer
+                                      model={"af1"}
+                                      desc="shoes"
+                                      autoRotate={true}
+                                      cameraControls={true}
+                                    />
+                                  </div>
                                 </div>
+
+                                {openItem && (
+                                  <p className="mt-3 text-sm font-geologica opacity-80">
+                                    {openItem.description}
+                                  </p>
+                                )}
+
+                              </div>
                             </div>
                         </ParticleCard>
 
