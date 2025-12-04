@@ -838,6 +838,7 @@ const MagicBento = ({
                     <div className="flex flex-col gap-2">
                         {/* Haut droite - Bento card avec model viewer */}
                         <ParticleCard
+                            ref={modelCardRef}
                             className={baseClassName + " min-h-[320px]"}
                             style={baseCardStyle}
                             disableAnimations={shouldDisableAnimations}
@@ -854,8 +855,25 @@ const MagicBento = ({
                                 <div className="flex items-center justify-center h-[260px] w-full">
                                     {/* MODEL VIEWER PLACEHOLDER */}
                                     <div
-                                        className="w-full h-full flex items-center font-geologica justify-center rounded-xl border border-dashed border-[rgba(242,12,181,0.4)] bg-[rgba(242,12,181,0.05)] text-xs md:text-sm opacity-90">
+                                      className="relative w-full h-full flex items-center justify-center rounded-xl border border-dashed border-[rgba(242,12,181,0.4)] bg-[rgba(242,12,181,0.05)] cursor-pointer"
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        const audio = new Audio("/sound/open.mp3");
+                                        audio.volume = 0.6;
+                                        audio.play().catch(() => {});
+                                        openItemModal({
+                                          sound: "/sound/open.mp3",
+                                          title: "AF1 Drop Preview",
+                                          description:
+                                            "A sneak peek at the upcoming AF1 digital‑exclusive drop. Clean, minimal, and built for collectors.",
+                                        });
+                                      }}
+                                    >
+                                      <div className="absolute inset-0 z-20"></div>
+
+                                      <div className="relative h-full w-full pointer-events-none flex items-center justify-center">
                                         <ModelViewer model={"af1"} desc="shoes" />
+                                      </div>
                                     </div>
                                 </div>
                             </div>
@@ -889,6 +907,28 @@ const MagicBento = ({
                     </div>
                 </div>
             </BentoCardGrid>
+            {openItem && (
+              <div
+                className="fixed inset-0 z-[999] flex items-center justify-center bg-black/60 backdrop-blur-sm"
+                onClick={() => setOpenItem(null)}
+              >
+                <div
+                  className="bg-[#0a0015] border border-lime-400 text-white rounded-xl p-6 w-[90%] max-w-md shadow-[0_0_25px_#ccff33]"
+                  style={modalPos ? { position: 'absolute', top: modalPos.top, left: modalPos.left } : {}}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <h2 className="text-2xl font-righteous text-lime-400 mb-3">{openItem.title}</h2>
+                  <p className="font-geologica text-sm opacity-90 leading-5 mb-4">{openItem.description}</p>
+
+                  <button
+                    className="w-full py-2 mt-2 rounded-full bg-lime-400 text-black font-bold hover:bg-[#eaff66] transition"
+                    onClick={() => setOpenItem(null)}
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            )}
         </>
     );
 };

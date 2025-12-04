@@ -1,19 +1,23 @@
 import { useHero } from "../context/useHero";
 import useScoolDirection from "../hooks/useScoolDirection";
 import ElectricBorder from "../components/ElectricBorder";
-import { Link } from "react-router-dom";   // ← OBLIGATOIRE
+import { Link } from "react-router-dom";
 import { useAuth } from "../context/useAuth";
+import { useCart } from "../context/useCart";
 import { useState, useEffect } from "react";
 
 export default function Navbar() {
     const direction = useScoolDirection();
-    const auth = useAuth() || {};
-    const { user, logout } = auth;
+    const { user, logout } = useAuth() || {};
+    const { cart } = useCart() || { cart: [] };
     const [menuOpen, setMenuOpen] = useState(false);
 
-    // CLOSE MENU WHEN CLICKING OUTSIDE
+    // close profile menu when clicking outside
     const handleClickOutside = (e) => {
-        if (!e.target.closest(".profile-menu") && !e.target.closest(".profile-button")) {
+        if (
+            !e.target.closest(".profile-menu") &&
+            !e.target.closest(".profile-button")
+        ) {
             setMenuOpen(false);
         }
     };
@@ -22,6 +26,8 @@ export default function Navbar() {
         document.addEventListener("click", handleClickOutside);
         return () => document.removeEventListener("click", handleClickOutside);
     }, []);
+
+    const cartCount = cart?.length || 0;
 
     return (
         <>
@@ -45,7 +51,6 @@ export default function Navbar() {
                             viewBox="0 0 258 587"
                             xmlns="http://www.w3.org/2000/svg"
                         >
-                            {/* SVG FULL */}
                             <g transform="matrix(1,0,0,1,-358.569275,-4.239223)">
                                 <g transform="matrix(3,0,0,1,0,0)">
                                     <g transform="matrix(0.333333,0,0,1,107.541717,0.528138)">
@@ -59,7 +64,6 @@ export default function Navbar() {
                                 </g>
                             </g>
                         </svg>
-
                         <p className="transition text-3xl ml-2">SWAG</p>
                     </Link>
 
@@ -71,83 +75,84 @@ export default function Navbar() {
                         <Link to="/news" className="hover:text-lime-400 transition">News</Link>
                     </div>
 
-                    {/* BUTTONS WITH ELECTRIC BORDER */}
+                    {/* AUTH BUTTONS */}
                     <div className="flex gap-4 text-sm items-center">
                         {!user ? (
                             <>
-                                <ElectricBorder
-                                    color="#f20cb5"
-                                    speed={1.5}
-                                    chaos={0.6}
-                                    thickness={2}
-                                    style={{ borderRadius: 9999 }}
-                                >
-                                    <Link
-                                        to="/login"
-                                        className="px-4 py-2 bg-[#f20cb5] rounded-full block text-center text-white"
-                                    >
+                                <ElectricBorder color="#f20cb5" speed={1.5} chaos={0.6} thickness={2} style={{ borderRadius: 9999 }}>
+                                    <Link to="/login" className="px-4 py-2 bg-[#f20cb5] rounded-full block text-center text-white">
                                         Log in
                                     </Link>
                                 </ElectricBorder>
 
-                                <ElectricBorder
-                                    color="#ccff33"
-                                    speed={1.4}
-                                    chaos={0.55}
-                                    thickness={2}
-                                    style={{ borderRadius: 9999 }}
-                                >
-                                    <Link
-                                        to="/register"
-                                        className="px-4 py-2 bg-lime-400 text-black rounded-full block text-center"
-                                    >
+                                <ElectricBorder color="#ccff33" speed={1.4} chaos={0.55} thickness={2} style={{ borderRadius: 9999 }}>
+                                    <Link to="/register" className="px-4 py-2 bg-lime-400 text-black rounded-full block text-center">
                                         Register
                                     </Link>
                                 </ElectricBorder>
                             </>
                         ) : (
-                            <div className="relative">
-                                <div
+                            <div className="flex items-center gap-4">
+                                {/* NEW CART ICON NEXT TO PROFILE */}
+                                <Link
+                                    to="/cart"
                                     className="
-                                        profile-button
-                                        w-10 h-10 rounded-full bg-lime-400 text-black
-                                        flex items-center justify-center font-bold cursor-pointer
-                                        shadow-[0_0_15px_#ccff33]
+                                        relative bg-black/40 border border-lime-400 rounded-full
+                                        w-10 h-10 flex items-center justify-center text-lime-400
+                                        hover:bg-lime-400 hover:text-black transition shadow-[0_0_12px_#ccff33]
                                     "
-                                    onClick={() => setMenuOpen(!menuOpen)}
                                 >
-                                    {user?.name?.charAt(0)?.toUpperCase() || "?"}
-                                </div>
-
-                                <div
-                                    className={`
-                                        profile-menu
-                                        absolute right-0 mt-3 w-40 rounded-xl overflow-hidden
-                                        bg-white/10 backdrop-blur-xl border border-white/20
-                                        transition-all duration-200
-                                        ${menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}
-                                    `}
-                                >
-                                    <div className="px-4 py-3 text-white/80 text-sm border-b border-white/10">
-                                        Signed in as<br />
-                                        <span className="text-white font-semibold">
-                                            {typeof user?.email === "string" ? user.email : "unknown"}
+                                    🛒
+                                    {cartCount > 0 && (
+                                        <span className="
+                                            absolute -top-2 -right-2 bg-lime-400 text-black
+                                            text-xs font-bold px-2 py-0.5 rounded-full shadow-lg
+                                        ">
+                                            {cartCount}
                                         </span>
+                                    )}
+                                </Link>
+
+                                <div className="relative">
+                                    <div
+                                        className="
+                                            profile-button
+                                            w-10 h-10 rounded-full bg-lime-400 text-black
+                                            flex items-center justify-center font-bold cursor-pointer
+                                            shadow-[0_0_15px_#ccff33]
+                                        "
+                                        onClick={() => setMenuOpen(!menuOpen)}
+                                    >
+                                        {user?.name?.charAt(0)?.toUpperCase() || "?"}
                                     </div>
 
-                                    <Link
-                                        to="/profile"
-                                        className="block px-4 py-2 text-white hover:bg-white/10"
+                                    <div
+                                        className={`
+                                            profile-menu
+                                            absolute right-0 mt-3 w-40 rounded-xl overflow-hidden
+                                            bg-white/10 backdrop-blur-xl border border-white/20
+                                            transition-all duration-200
+                                            ${menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}
+                                        `}
                                     >
-                                        Profile
-                                    </Link>
+                                        <div className="px-4 py-3 text-white/80 text-sm border-b border-white/10">
+                                            Signed in as<br />
+                                            <span className="text-white font-semibold">
+                                                {typeof user?.email === "string" ? user.email : "unknown"}
+                                            </span>
+                                        </div>
 
-                                    <button
-                                        className="block text-left w-full px-4 py-2 text-red-400 hover:bg-white/10"
-                                        onClick={logout}
-                                    >
-                                        Log out
-                                    </button>
+                                        <Link to="/profile" className="block px-4 py-2 text-white hover:bg-white/10">
+                                            Profile
+                                        </Link>
+
+                                        <button
+                                            className="block text-left w-full px-4 py-2 text-red-400 hover:bg-white/10"
+                                            onClick={logout}
+                                        >
+                                            Log out
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         )}

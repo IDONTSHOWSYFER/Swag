@@ -1,5 +1,7 @@
 import { useRef, useEffect, useState, useCallback } from "react";
 import { gsap } from "gsap";
+import { useCart } from "../context/useCart";
+import { useAuth } from "../context/useAuth";
 import ModelViewer from "../components/ModelViewer";
 import ItemModal from "../components/ItemModal";
 import Footer from "./Footer";
@@ -411,8 +413,8 @@ const GlobalSpotlight = ({
         minDistance <= proximity
           ? 0.8
           : minDistance <= fadeDistance
-          ? ((fadeDistance - minDistance) / (fadeDistance - proximity)) * 0.8
-          : 0;
+            ? ((fadeDistance - minDistance) / (fadeDistance - proximity)) * 0.8
+            : 0;
 
       gsap.to(spotlightRef.current, {
         opacity: targetOpacity,
@@ -476,7 +478,7 @@ const useMobileDetection = () => {
 
 const MagicBentoMarketplace = ({
   items = [],
-  onSelect = () => {},
+  onSelect = () => { },
   textAutoHide = true,
   enableStars = true,
   enableSpotlight = true,
@@ -495,6 +497,8 @@ const MagicBentoMarketplace = ({
   const [openItem, setOpenItem] = useState(null);
   const [modalPos, setModalPos] = useState(null);
   const isMobile = useMobileDetection();
+  const { user } = useAuth();
+  const { addToCart } = useCart();
   const shouldDisableAnimations = disableAnimations || isMobile;
 
   const openItemModal = (item) => {
@@ -505,25 +509,24 @@ const MagicBentoMarketplace = ({
 
     // Toujours en bas à gauche de la card
     setModalPos({
-        top: rect.bottom + window.scrollY -200,
-        left: rect.left + window.scrollX -125
+      top: rect.bottom + window.scrollY - 200,
+      left: rect.left + window.scrollX - 125
     });
 
     setOpenItem(item);
 
     if (item.sound) {
-        const audio = new Audio(item.sound);
-        audio.play().catch(() => {});
+      const audio = new Audio(item.sound);
+      audio.play().catch(() => { });
     }
-};
+  };
 
 
   const baseClassName =
     `card flex flex-col justify-between relative aspect-[4/3] min-h-[350px] w-full max-w-full ` +
     `p-5 rounded-[20px] border border-solid font-light overflow-hidden ` +
     `transition-all duration-300 ease-in-out hover:-translate-y-0.5 ` +
-    `hover:shadow-[0_8px_25px_rgba(0,0,0,0.15)] ${
-      enableBorderGlow ? "card--border-glow" : ""
+    `hover:shadow-[0_8px_25px_rgba(0,0,0,0.15)] ${enableBorderGlow ? "card--border-glow" : ""
     }`;
 
   const baseCardStyle = {
@@ -783,12 +786,12 @@ const MagicBentoMarketplace = ({
         />
       )}
 
-{/* ICI → ON REND DE NOUVEAU LES VRAIES CARTES */}
-<div className="flex flex-col full-h-screen">
-  <div className="flex-1">
-    <BentoCardGrid gridRef={gridRef}>
-      <div
-        className="
+      {/* ICI → ON REND DE NOUVEAU LES VRAIES CARTES */}
+      <div className="flex flex-col full-h-screen">
+        <div className="flex-1">
+          <BentoCardGrid gridRef={gridRef}>
+            <div
+              className="
           grid 
           grid-cols-1 
           sm:grid-cols-2 
@@ -796,76 +799,101 @@ const MagicBentoMarketplace = ({
           gap-4
           auto-rows-fr
         "
-      >
-        {items.map((item) => (
-          <ParticleCard
-            key={item.id}
-            className={`${baseClassName} h-auto min-h-0`}
-            style={baseCardStyle}
-            disableAnimations={shouldDisableAnimations}
-            particleCount={particleCount}
-            glowColor={glowColor}
-            enableTilt={enableTilt}
-            clickEffect={clickEffect}
-            enableMagnetism={enableMagnetism}
-            onClick={() => {
-              const isOpening = activeDescription !== item.id;
-              if (isOpening) {
-                const audio = new Audio("/sound/open.mp3");
-                audio.play().catch(() => {});
-              }
-              setActiveDescription(isOpening ? item.id : null);
-            }}
-          >
-            <div className="card__content flex flex-col gap-4 relative text-white h-full">
-              <h2 className="text-xl md:text-2xl font-righteous text-lime-400 text-center">
-                {item.name}
-              </h2>
+            >
+              {items.map((item) => (
+                <ParticleCard
+                  key={item.id}
+                  className={`${baseClassName} h-auto min-h-0`}
+                  style={baseCardStyle}
+                  disableAnimations={shouldDisableAnimations}
+                  particleCount={particleCount}
+                  glowColor={glowColor}
+                  enableTilt={enableTilt}
+                  clickEffect={clickEffect}
+                  enableMagnetism={enableMagnetism}
+                  onClick={() => {
+                    const isOpening = activeDescription !== item.id;
+                    if (isOpening) {
+                      const audio = new Audio("/sound/open.mp3");
+                      audio.play().catch(() => { });
+                    }
+                    setActiveDescription(isOpening ? item.id : null);
+                  }}
+                >
+                  <div className="card__content flex flex-col gap-4 relative text-white h-full">
+                    {/* PRICE LABEL — now bottom-left */}
+                    {item.price && (
+                      <div className="absolute bottom-[3rem] left-3 bg-lime-400 text-black font-bold px-3 py-1 rounded-full shadow-lg text-sm z-20">
+                        ${item.price}
+                      </div>
+                    )}
 
-              <div
-                className="
+                    {/* ADD TO CART BUTTON (ONLY IF LOGGED IN) */}
+                    {user && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation(); // évite d’ouvrir la description
+                          addToCart(item);
+                        }}
+                        className="
+                    absolute top-[-0.4rem] right-1
+                    bg-black/60 border border-lime-400 text-lime-400
+                    w-10 h-10 rounded-full flex items-center justify-center z-20
+                    hover:bg-lime-400 hover:text-black transition 
+                    shadow-[0_0_12px_#ccff33]
+                  "
+                      >
+                        <span className="text-2xl leading-none pb-1">+</span>
+                      </button>
+                    )}
+                    <h2 className="text-xl md:text-2xl font-righteous text-lime-400 text-center">
+                      {item.name}
+                    </h2>
+
+                    <div
+                      className="
                   w-full 
                   rounded-xl 
                   overflow-hidden
                   border border-[rgba(242,12,181,0.3)]
                   bg-[rgba(242,12,181,0.05)]
                 "
-                style={{ aspectRatio: '16 / 9' }}
-              >
-                <model-viewer
-                  src={`/models/${item.model}.glb`}
-                  auto-rotate
-                  camera-controls
-                  disable-zoom
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'contain',
-                    display: 'block',
-                  }}
-                ></model-viewer>
-              </div>
+                      style={{ aspectRatio: '16 / 9' }}
+                    >
+                      <model-viewer
+                        src={`/models/${item.model}.glb`}
+                        auto-rotate
+                        camera-controls
+                        disable-zoom
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'contain',
+                          display: 'block',
+                        }}
+                      ></model-viewer>
+                    </div>
 
-              {activeDescription === item.id && (
-                <div className="
+                    {activeDescription === item.id && (
+                      <div className="
                   mt-3 p-3 rounded-xl 
                   bg-white/10 backdrop-blur-md 
                   border border-white/20 
                   text-sm text-white 
                   animate-fadeIn
                 ">
-                  {item.description}
-                </div>
-              )}
+                        {item.description}
+                      </div>
+                    )}
+                  </div>
+                </ParticleCard>
+              ))}
             </div>
-          </ParticleCard>
-        ))}
+          </BentoCardGrid>
+        </div>
       </div>
-    </BentoCardGrid>
-  </div>
-</div>
-        </>
-    );
+    </>
+  );
 };
 
 export default MagicBentoMarketplace;

@@ -171,7 +171,7 @@ export default function Marketplace() {
 
         {/* ✨ FEATURED COLLECTIONS – ULTRA DESIGN SECTION */}
         <section className="w-full my-12 px-6">
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-6xl mx-auto px-2 sm:px-4">
             <h2 className="text-3xl font-righteous text-white text-center mb-6 drop-shadow-[0_0_10px_rgba(242,12,181,0.7)]">
               Featured Collections 🔥
             </h2>

@@ -8,6 +8,7 @@ import News from "../pages/News";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Profile from "../pages/Profile";
+import Cart from "../pages/Cart";
 
 export default function AppRouter() {
     return (
@@ -18,6 +19,7 @@ export default function AppRouter() {
             <Route path="/support" element={<Support />} />
             <Route path="/confirmation" element={<Confirmation />} />
             <Route path="/news" element={<News />} />
+            <Route path="/cart" element={<Cart />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
