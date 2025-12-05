@@ -47,6 +47,9 @@ src/
 
 🛠️ How to Use / Run the Project
 
+Move to the right directory
+cd ./swag_react_vite
+
 📦 Install dependencies
 npm install
 
