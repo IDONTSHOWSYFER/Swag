@@ -16,23 +16,6 @@ Our project simulates a streetwear marketplace + news experience, including:
 
 All wrapped in a clean, modern, cyber-streetwear aesthetic.
 
-🌐 What is SWAG?
-
-SWAG is a modern, fashion-inspired, React-powered web application built during an intensive 5-day React Hackathon Learning Lab (CODA x SPARKA).
-The mission:
-
-Build a fully functional, well-architected, visually iconic React application as a real dev team.
-
-Our project simulates a streetwear marketplace + news experience, including:
-	•	🛒 Marketplace with real item filtering, pagination & dynamic modals
-	•	🧢 3D-inspired product cards with interactive UI
-	•	📰 News Hub with dynamic routing and article detail pages
-	•	📨 Contact / Support panel with email & call actions
-	•	👤 User Profile & Cart pages
-	•	⚙️ Global routing, scroll-to-top behavior & responsive layout
-
-All wrapped in a clean, modern, cyber-streetwear aesthetic.
-
 📁 Project Structure
 src/
  ├── components/
