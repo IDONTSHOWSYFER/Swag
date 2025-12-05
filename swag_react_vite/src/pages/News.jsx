@@ -1,8 +1,6 @@
 // src/pages/News.jsx
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import { ARTICLES } from "../data/articles";
 
 export default function News() {
@@ -13,7 +11,6 @@ export default function News() {
 
   return (
     <>
-      <Navbar />
 
       <div className="pt-28 pb-20 max-w-6xl mx-auto px-4">
         <h1 className="text-center text-4xl font-righteous text-lime-400 mb-12">

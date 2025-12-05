@@ -1,6 +1,4 @@
 // src/pages/Cart.jsx
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import { useCart } from "../context/useCart";
 import ElectricBorder from "../components/ElectricBorder";
 import { Link } from "react-router-dom";
@@ -10,7 +8,6 @@ export default function Cart() {
 
     return (
         <div className="min-h-screen flex flex-col bg-[#060010]">
-            <Navbar />
 
             <main className="flex-1 pt-32 pb-20 px-6">
                 <h1 className="text-center text-4xl font-righteous text-lime-400 mb-10">
@@ -107,8 +104,6 @@ export default function Cart() {
                     </div>
                 )}
             </main>
-
-            <Footer />
         </div>
     );
 }
