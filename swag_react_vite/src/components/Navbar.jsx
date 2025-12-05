@@ -70,7 +70,7 @@ export default function Navbar() {
                         >
                             <g transform="matrix(1,0,0,1,-358.569275,-4.239223)">
                                 <g transform="matrix(3,0,0,1,0,0)">
-                                    <g id="Arrière-plan" transform="matrix(0.333333,0,0,1,107.541717,0.528138)">
+                                    <g transform="matrix(0.333333,0,0,1,107.541717,0.528138)">
                                         <g transform="matrix(1,0,0,1,-10.536654,0)">
                                             <path
                                                 fill="#f20cb5"

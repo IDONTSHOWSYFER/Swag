@@ -1,6 +1,5 @@
 // src/pages/Marketplace.jsx
 import { useState } from "react";
-import Navbar from "../components/Navbar";
 import MarketplaceBento from "../components/MagicBentoMarketplace";
 import ItemModal from "../components/ItemModal";
 import FilterBar from "../components/FilterBar";
@@ -42,7 +41,6 @@ export default function Marketplace() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
 
       <main className="pt-28 pb-20 flex-1">
         <h1 className="text-center text-4xl font-righteous text-lime-400 mb-6">

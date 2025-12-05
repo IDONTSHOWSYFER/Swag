@@ -1,12 +1,9 @@
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import SupportForm from "../components/SupportForm.jsx";
 
 export default function Support() {
 
 return (
         <div className="min-h-screen max-h-none text-white font-righteous px-4">
-            <Navbar />
             <h1 className="pt-15 text-center text-4xl mt-12 mb-8 text-[#f20cb5]">
                 Page Contact
             </h1>
