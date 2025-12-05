@@ -1,4 +1,3 @@
-import ElectricBorder from "../components/ElectricBorder";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../context/useAuth";
 import { useCart } from "../context/useCart";
@@ -55,8 +54,8 @@ export default function Navbar() {
                     bg-[#0c0c0c6a] backdrop-blur-[20px] shadow-lg rounded-full 
                     z-50 px-6 py-3 border-1 border-[#f1f1f126] font-righteous
                     transition-all duration-500
-                    ${isVisible 
-                        ? "opacity-100 translate-y-0" 
+                    ${isVisible
+                        ? "opacity-100 translate-y-0"
                         : "opacity-0 -translate-y-10 pointer-events-none"}
                 `}
             >
@@ -97,17 +96,13 @@ export default function Navbar() {
                     <div className="flex gap-4 text-sm items-center">
                         {!user ? (
                             <>
-                                <ElectricBorder color="#f20cb5" speed={1.5} chaos={0.6} thickness={2} style={{ borderRadius: 9999 }}>
-                                    <Link to="/login" className="px-4 py-2 bg-[#f20cb5] rounded-full block text-center text-white">
-                                        Log in
-                                    </Link>
-                                </ElectricBorder>
+                                <Link to="/login" className="px-4 py-2 bg-[#f20cb5] rounded-full block text-center text-white">
+                                    Log in
+                                </Link>
 
-                                <ElectricBorder color="#ccff33" speed={1.4} chaos={0.55} thickness={2} style={{ borderRadius: 9999 }}>
-                                    <Link to="/register" className="px-4 py-2 bg-lime-400 text-black rounded-full block text-center">
-                                        Register
-                                    </Link>
-                                </ElectricBorder>
+                                <Link to="/register" className="px-4 py-2 bg-lime-400 text-black rounded-full block text-center">
+                                    Register
+                                </Link>
                             </>
                         ) : (
                             <div className="flex items-center gap-4">
