@@ -1,5 +1,4 @@
 // ElectricBorder.jsx
-// 100% Compatible React + Vite
 
 import { useRef, useEffect } from "react";
 

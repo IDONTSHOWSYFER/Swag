@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 
 export default function useScoolDirection() {
     const [direction, setDirection] = useState("down");
-    const lastY = useRef(0); // valeur par défaut sécurisée
+    const lastY = useRef(0);
 
     useEffect(() => {
         // initialisation une fois que le DOM existe

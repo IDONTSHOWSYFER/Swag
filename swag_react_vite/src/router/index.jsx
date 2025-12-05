@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-
+import ScrollToTop from "../components/ScrollToTop";
 import Home from "../pages/Home";
 import Marketplace from "../pages/Marketplace";
 import Support from "../pages/Support"
@@ -14,6 +14,8 @@ import Article from "../pages/Article";
 
 export default function AppRouter() {
     return (
+        <>
+        <ScrollToTop />
         <Routes>
             <Route index element={<Home />} />
             <Route path="/" element={<Home />} />
@@ -27,5 +29,6 @@ export default function AppRouter() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/news/:id" element={<Article />} />
         </Routes>
+        </>
     );
 }
