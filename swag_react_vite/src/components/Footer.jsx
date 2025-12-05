@@ -107,8 +107,7 @@ export default function Footer() {
               ].map((item, i) => (
                 <li key={i}>
                   <a
-                    href="#"
-                    className="text-white opacity-70 text-sm hover:opacity-100 hover:text-pink-500 transition ease-in-out duration-150"
+                    className="text-white opacity-70 text-sm"
                   >
                     {item}
                   </a>

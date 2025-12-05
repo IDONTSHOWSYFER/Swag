@@ -13,6 +13,12 @@ function saveCurrentUser(user) {
     localStorage.setItem(SESSION_KEY, JSON.stringify(user));
 }
 
+export function checkIfUserIsLogged() {
+    const user = getCurrentUser();
+    return !!user;
+}
+
+
 export function registerUser({ name, email, password }) {
     const users = loadUsers();
 

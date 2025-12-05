@@ -1,4 +1,3 @@
-import { useHero } from "../context/useHero";
 import useScoolDirection from "../hooks/useScoolDirection";
 import ElectricBorder from "../components/ElectricBorder";
 import { Link } from "react-router-dom";
@@ -12,7 +11,6 @@ export default function Navbar() {
     const { cart } = useCart() || { cart: [] };
     const [menuOpen, setMenuOpen] = useState(false);
 
-    // close profile menu when clicking outside
     const handleClickOutside = (e) => {
         if (
             !e.target.closest(".profile-menu") &&
