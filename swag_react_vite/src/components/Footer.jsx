@@ -1,3 +1,5 @@
+import { checkIfUserIsLogged } from "../components/utils/AuthMock";
+
 export default function Footer() {
   return (
     <footer className="bg-black text-white px-6 md:px-16 py-16 relative z-[9999]">
@@ -81,13 +83,7 @@ export default function Footer() {
 
           <div className="mt-8">
             <p className="text-white/70 mb-3 tracking-wide">Be part of the Culture.</p>
-            <a
-              href="/register"
-              className="inline-block px-6 py-3 rounded-full bg-lime-400 text-black font-bold hover:bg-[#eaff66] transition shadow-[0_0_18px_#ccff33]"
-            >
-              Join SWAG Now
-            </a>
-          </div>
+          </div>    
         </div>
 
         {/* MIDDLE COLUMN – LEGAL + EXPLORE SIDE BY SIDE */}
