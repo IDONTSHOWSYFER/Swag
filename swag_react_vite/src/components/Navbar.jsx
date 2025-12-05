@@ -1,4 +1,3 @@
-import { useHero } from "../context/useHero";
 import useScoolDirection from "../hooks/useScoolDirection";
 import ElectricBorder from "../components/ElectricBorder";
 import { Link } from "react-router-dom";

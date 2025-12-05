@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/useAuth";
-import { updateUser } from "../components/utils/AuthMock";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import { updateUser } from "../components/utils/AuthMock";
 
 export default function Profile() {
     const { user } = useAuth() || {};

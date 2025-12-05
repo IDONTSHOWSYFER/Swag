@@ -1,5 +1,4 @@
 // src/pages/Cart.jsx
-
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useCart } from "../context/useCart";
