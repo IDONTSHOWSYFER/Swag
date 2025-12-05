@@ -1,4 +1,4 @@
-import { checkIfUserIsLogged } from "../components/utils/AuthMock";
+import FooterForm from "./FooterForm";
 
 export default function Footer() {
   return (
@@ -145,61 +145,7 @@ export default function Footer() {
         </div>
 
         {/* RIGHT COLUMN – CONTACT FORM */}
-        <div>
-          <h3 className="font-[Righteous] text-lg mb-3">Contact</h3>
-
-          <form className="flex text-black flex-col gap-4" aria-label="Contact form">
-            <input
-              type="text"
-              placeholder="Your name"
-              aria-label="Your name"
-              className="bg-gray-100 border border-gray-300 rounded-xl px-4 py-2 text-sm"
-              required
-            />
-
-            <input
-              type="email"
-              placeholder="Email address"
-              aria-label="Email address"
-              className="bg-gray-100 border border-gray-300 rounded-xl px-4 py-2 text-sm"
-              required
-            />
-
-            <textarea
-              placeholder="Message"
-              aria-label="Message"
-              className="bg-gray-100 border border-gray-300 rounded-xl px-4 py-2 text-sm h-[70px]"
-              required
-            />
-
-            {/* BUTTON GLOW ANIMÉ */}
-            <button
-              type="submit"
-              className="
-                relative overflow-hidden rounded-xl
-                px-4 py-3 text-sm font-semibold text-white cursor-pointer
-                bg-gradient-to-br from-pink-500 to-pink-300
-                shadow-[0_4px_12px_rgba(242,12,181,0.25)]
-                transition-transform duration-200
-                active:scale-95
-                hover:scale-105 hover:shadow-[0_6px_18px_rgba(242,12,181,0.35)]
-              "
-              aria-label="Send message"
-            >
-              <span className="relative z-10">Send Message</span>
-
-              {/* Glow Animation */}
-              <span
-                className="
-                  absolute inset-0 -left-full w-[200%] h-full
-                  bg-[linear-gradient(120deg,transparent,rgba(255,255,255,0.25),transparent)]
-                  animate-none
-                  hover:animate-slide-glow
-                "
-              ></span>
-            </button>
-          </form>
-        </div>
+        <FooterForm />
 
       </div>
 

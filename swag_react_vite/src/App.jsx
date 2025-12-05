@@ -1,6 +1,7 @@
 import ElectricCursor from "./components/ElectricCursor";
 import Navbar from "./components/Navbar";
 import AppRouter from "./router";
+import Footer from "./components/Footer";
 
 
 export default function App() {
@@ -16,6 +17,7 @@ export default function App() {
         speed={0.18}
       />
       <AppRouter />
+      <Footer />
     </>
   );
 }

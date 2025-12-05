@@ -71,15 +71,15 @@ export default function Hero() {
 
                 <div className="text-lime-400 text-3xl gap-4 flex">
 
-                    <h2 className={`${step >= 1 ? "opacity-100" : "opacity-0"} transition-all duration-700`}>
+                    <h2>
                         Discover
                     </h2>
 
-                    <h2 className={`${step >= 2 ? "opacity-100" : "opacity-0"} transition-all duration-700`}>
+                    <h2>
                         Collect
                     </h2>
 
-                    <h2 className={`${step >= 3 ? "opacity-100" : "opacity-0"} transition-all duration-700`}>
+                    <h2>
                         Flex
                     </h2>
 

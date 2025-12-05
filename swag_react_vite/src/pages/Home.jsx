@@ -1,6 +1,5 @@
 import Hero from "../components/Hero";
 import MagicBento from "../components/MagicBento";
-import Footer from "../components/Footer";
 import { HeroProvider } from "../context/HeroProvider";
 import FeaturedDrip from "../components/FeaturedDrip";
 import CTAJoin from "../components/CTAJoin";
@@ -14,7 +13,6 @@ export default function Home() {
       <FeaturedDrip />
       <CTAJoin />
       <LatestBlogPreview />
-      <Footer />
     </HeroProvider>
   );
 }

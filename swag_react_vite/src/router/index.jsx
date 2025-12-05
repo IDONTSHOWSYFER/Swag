@@ -9,6 +9,8 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Profile from "../pages/Profile";
 import Cart from "../pages/Cart";
+import Article from "../pages/Article";
+
 
 export default function AppRouter() {
     return (
@@ -23,6 +25,7 @@ export default function AppRouter() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/news/:id" element={<Article />} />
         </Routes>
     );
 }
