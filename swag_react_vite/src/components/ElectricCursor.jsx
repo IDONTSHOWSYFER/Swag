@@ -10,7 +10,6 @@ export default function ElectricCursor({
   zIndex = 9999999
 }) {
   useEffect(() => {
-    // Main circle
     const cursor = document.createElement("div");
     cursor.style.position = "fixed";
     cursor.style.top = "0";
