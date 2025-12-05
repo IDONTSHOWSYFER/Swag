@@ -1,16 +1,38 @@
-import useScoolDirection from "../hooks/useScoolDirection";
 import ElectricBorder from "../components/ElectricBorder";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../context/useAuth";
 import { useCart } from "../context/useCart";
 import { useState, useEffect } from "react";
 
 export default function Navbar() {
-    const direction = useScoolDirection();
+    const location = useLocation();
     const { user, logout } = useAuth() || {};
     const { cart } = useCart() || { cart: [] };
-    const [menuOpen, setMenuOpen] = useState(false);
 
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [isVisible, setIsVisible] = useState(true);
+
+    const cartCount = cart?.length || 0;
+
+    // Hide navbar only when at top of home page
+    useEffect(() => {
+        if (location.pathname !== "/") {
+            setIsVisible(true);
+            return;
+        }
+
+        const handleScroll = () => {
+            const y = window.scrollY;
+            setIsVisible(y > 0); // hidden only when y = 0
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        handleScroll(); // initial check
+
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [location.pathname]);
+
+    // Close profile menu when clicking outside
     const handleClickOutside = (e) => {
         if (
             !e.target.closest(".profile-menu") &&
@@ -25,8 +47,6 @@ export default function Navbar() {
         return () => document.removeEventListener("click", handleClickOutside);
     }, []);
 
-    const cartCount = cart?.length || 0;
-
     return (
         <>
             <nav
@@ -35,9 +55,9 @@ export default function Navbar() {
                     bg-[#0c0c0c6a] backdrop-blur-[20px] shadow-lg rounded-full 
                     z-50 px-6 py-3 border-1 border-[#f1f1f126] font-righteous
                     transition-all duration-500
-                    ${direction === "up"
-                        ? "opacity-0 -translate-y-10"
-                        : "opacity-100 translate-y-0"}
+                    ${isVisible 
+                        ? "opacity-100 translate-y-0" 
+                        : "opacity-0 -translate-y-10 pointer-events-none"}
                 `}
             >
                 <div className="flex items-center justify-between">
@@ -91,7 +111,8 @@ export default function Navbar() {
                             </>
                         ) : (
                             <div className="flex items-center gap-4">
-                                {/* NEW CART ICON NEXT TO PROFILE */}
+
+                                {/* CART ICON */}
                                 <Link
                                     to="/cart"
                                     className="
@@ -111,6 +132,7 @@ export default function Navbar() {
                                     )}
                                 </Link>
 
+                                {/* PROFILE MENU */}
                                 <div className="relative">
                                     <div
                                         className="
